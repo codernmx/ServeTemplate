@@ -4,7 +4,7 @@ var router = express.Router();
 var fs = require('fs'); //文件
 var multer = require('multer');   //上传文件中间件
 var moment = require('silly-datetime'); //格式化时间
-var path = require('path');
+
 const { randomChar } = require('../utils/index')
 const { fileUrl } = require('../config/index')
 

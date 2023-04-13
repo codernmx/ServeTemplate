@@ -5,21 +5,16 @@ var jwt = require('../utils/jwt')
 
 const { success, fail, uuid } = require('../utils/index');
 
-const { literal } = require("sequelize");
-const sequelize = require('sequelize')
-const seqCoon = require('../utils/sequelize')
-
-const User = require('../models/user')(seqCoon, sequelize)
-const Article = require('../models/article')(seqCoon, sequelize)
-
-// 使用模糊查询需要先引入Op
-const Op = sequelize.Op;
+const { literal, Op, Sequelize } = require("sequelize");
+const { User, Article, Menu } = require('../models/index')
 
 
 // belongsTo 谁属于一个谁 例：一本书属于一个人
 Article.belongsTo(User, { foreignKey: 'userId', sourceKey: 'id' });
 // hasOne 谁拥有一个谁  例：一个人拥有一本书
 // User.hasOne(Article, { foreignKey: 'userId', sourceKey: 'id' });
+
+
 
 /* 登录 */
 router.post('/login', async (req, response, next) => {
@@ -113,7 +108,7 @@ router.post('/update/article', async (req, response, next) => {
 router.post('/delete/article', async (req, response, next) => {
 	const { id } = req.body
 	try {
-		const data = await Article.update({ deleteTime: sequelize.fn('NOW') }, { where: { id } }); //软删除
+		const data = await Article.update({ deleteTime: Sequelize.fn('NOW') }, { where: { id } }); //软删除
 		// const data = await Article.destroy({ where: { id } }); //直接删除
 		response.send(success(data))
 	} catch (error) {

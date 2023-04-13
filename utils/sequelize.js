@@ -16,6 +16,10 @@ const mysql_Sequelize = new Sequelize('v3-admin', 'root', '137928', {
     define: {
         timestamps: false, // 关键配置，默认为 true， 修改为 false 即可
         'charset': 'utf8' //处理Mysql中中文字符问题
+    },
+    dialectOptions: {
+        dateStrings: true,
+        typeCast: true
     }
 })
 //3.导出数据库的连接对象
