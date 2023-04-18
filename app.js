@@ -1,7 +1,5 @@
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 const mysql_test = require('./utils/sequelize')
 
 var Index = require('./routes/index');
@@ -11,10 +9,8 @@ var jwt = require('./utils/jwt')
 var app = express();
 
 
-app.use(logger('dev'));
 app.use(express.json({ limit: '200mb' })) //修改请求参数限制
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/upload', express.static(path.join(__dirname, '/upload')));
 
@@ -54,12 +50,12 @@ mysql_test.authenticate()  //用来测试数据库是否连接成功
 	.then(() => {
 		console.log('数据库连接成功')
 	}).catch((err) => {
-		console.log('数据库连接失败' + err)
+		console.log('数据库连接失败:' + err)
 	})
 
 app.use(function (req, res, next) {
 	res.send({
-		msg: '接口未定义',
+		msg: 'NOT FOUND',
 		code: 404
 	})
 });
