@@ -1,7 +1,7 @@
 //1.导入Sequelize模块
 const Sequelize = require('sequelize')
-const {dbConfig} = require('../config/index')
-const {database, user, password, options} = dbConfig
+const { dbConfig } = require('../config/index')
+const { database, user, password, options } = dbConfig
 
 
 //new Sequelize('数据库名','用户名','密码',{配置信息})

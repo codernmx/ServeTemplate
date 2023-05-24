@@ -1,7 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 
 
-
 //code  生成附件名称（随机字符串）
 function randomChar (length) {
 	var str = '0123456789'
@@ -12,22 +11,13 @@ function randomChar (length) {
 }
 
 //成功返回参数
-function success (res, total = null) {
-	if (total) {
-		return {
-			code: 200,
-			data: res,
-			msg: '成功',
-			total,
-			timestamp: new Date().getTime()
-		}
-	} else {
-		return {
-			code: 200,
-			data: res,
-			msg: '成功',
-			timestamp: new Date().getTime()
-		}
+function success (data) {
+	return {
+		code: 200,
+		data,
+		msg: '成功',
+		total,
+		timestamp: new Date().getTime()
 	}
 }
 
