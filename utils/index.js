@@ -16,7 +16,6 @@ function success (data) {
 		code: 200,
 		data,
 		msg: '成功',
-		total,
 		timestamp: new Date().getTime()
 	}
 }
