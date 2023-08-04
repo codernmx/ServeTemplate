@@ -27,8 +27,7 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-console.log(`You Can View Your Project In The Browser At:http://localhost:${port}`)
-
+console.log(`You Can View Your Project In The Browser At: \x1b[96mhttp://localhost:${port}\x1b[0m`);
 /**
  * Normalize a port into a number, string, or false.
  */

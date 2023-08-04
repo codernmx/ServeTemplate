@@ -1,3 +1,7 @@
+/*
+ * @Date: 2023-08-04 15:02:49
+ * @LastEditTime: 2023-08-04 15:10:19
+ */
 var express = require('express');
 var path = require('path');
 const mysql_test = require('./utils/sequelize')
@@ -25,8 +29,11 @@ app.all('*', function (req, res, next) {
 
 /* 所有请求都过token校验 */
 app.use(function (req, res, next) {
-	let passUrl = ['/api/login']
-	if (!passUrl.includes(req.url) && (req.url.indexOf('upload') == -1)) {
+	let passUrl = [
+		'/api/login',
+		'/api/upload/file',
+	]
+	if (!passUrl.includes(req.path)) {
 		let token = req.headers.token;
 		let result = jwt.verifyToken(token);
 		if (result.code == 500) {

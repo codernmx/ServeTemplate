@@ -42,7 +42,6 @@ router.post('/login', async (req, response, next) => {
 });
 
 /* 分页查询 */
-/* 获取文章列表 */
 router.post('/article/list', async (req, response, next) => {
 	const { title, pageSize, pageNum } = req.body
 	try {
@@ -65,7 +64,7 @@ router.post('/article/list', async (req, response, next) => {
 
 
 
-/* 获取文章详情 */
+/* 获取详情 */
 router.post('/article/details', async (req, response, next) => {
 	const { id } = req.body
 	try {
@@ -82,7 +81,8 @@ router.post('/article/details', async (req, response, next) => {
 		response.send(fail(error))
 	}
 });
-/* 添加文章 */
+
+/* 添加 */
 router.post('/insert/article', async (req, response, next) => {
 	const { title, content, userId, inputValue } = req.body
 	try {
@@ -93,7 +93,19 @@ router.post('/insert/article', async (req, response, next) => {
 	}
 });
 
-/* 编辑文章 */
+// 批量添加
+router.post('/insert/article/batch', async (req, response, next) => {
+	const {  } = req.body
+	try {
+		const res = await Article.bulkCreate([])
+		response.send(success(res))
+	} catch (error) {
+		response.send(fail(error))
+	}
+});
+
+
+/* 编辑 */
 router.post('/update/article', async (req, response, next) => {
 	const { id, title, content, inputValue } = req.body
 	try {
@@ -104,7 +116,7 @@ router.post('/update/article', async (req, response, next) => {
 	}
 });
 
-/* 删除文章 */
+/* 删除 */
 router.post('/delete/article', async (req, response, next) => {
 	const { id } = req.body
 	try {
