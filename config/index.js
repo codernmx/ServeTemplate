@@ -1,10 +1,10 @@
 const fileUrl = 'http://localhost:4000/'  //文件访问路径
 
 
-const database = 'v3-admin'
-const user = 'root'
-const password = '137928'
-const host = '127.0.0.1'
+const database = 'v3-admin' //数据库名称
+const user = 'root' //数据库用户名
+const password = '137928' //数据库密码
+const host = '127.0.0.1' //数据库服务器的IP地址或
 const dbPort = 3306  //数据库端口
 
 const port = 4000  //项目的端口
@@ -19,14 +19,14 @@ const options = {
 		idle: 20000 //等待延迟的时间，单位是毫秒
 	},
 	logging: false, //是否开启 sql 日志
-	timezone: '+08:00',
+	timezone: '+08:00',//东八时区
 	define: {
 		timestamps: false, // 关键配置，默认为 true， 修改为 false 即可
 		'charset': 'utf8' //处理Mysql中中文字符问题
 	},
 	dialectOptions: {
-		dateStrings: true,
-		typeCast: true
+		dateStrings: true, //处理时间格式问题
+		typeCast: true //处理时间格式问题
 	}
 }
 

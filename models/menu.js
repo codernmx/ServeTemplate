@@ -1,64 +1,72 @@
-/* jshint indent: 2 */
-const moment = require('moment')
-module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('menu', {
-    'id': {
+const Sequelize = require('sequelize');
+module.exports = function(sequelize, DataTypes) {
+  return sequelize.define('Menu', {
+    id: {
       type: DataTypes.STRING(256),
       allowNull: false,
       primaryKey: true,
       comment: "id"
     },
-    'parId': {
+    parId: {
       type: DataTypes.STRING(255),
       allowNull: true,
       comment: "父级id"
     },
-    'title': {
+    title: {
       type: DataTypes.STRING(256),
       allowNull: true,
       comment: "菜单名称"
     },
-    'icon': {
+    icon: {
       type: DataTypes.STRING(256),
       allowNull: true,
       comment: "图标"
     },
-    'path': {
+    path: {
       type: DataTypes.STRING(256),
       allowNull: true,
       comment: "路径"
     },
-    'name': {
+    name: {
       type: DataTypes.STRING(255),
       allowNull: true,
       comment: "菜单name"
     },
-    'sort': {
+    sort: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      defaultValue: '0',
+      defaultValue: 0,
       comment: "排序"
     },
-    'createTime': {
+    createTime: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-      comment: "创建时间",
-      get () {
-        return moment(this.getDataValue('createTime')).format('YYYY-MM-DD HH:mm:ss');
-      }
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP'),
+      comment: "创建时间"
     },
-    'updateTime': {
+    updateTime: {
       type: DataTypes.DATE,
       allowNull: true,
       comment: "更新时间"
     },
-    'deleteTime': {
+    deleteTime: {
       type: DataTypes.DATE,
       allowNull: true,
       comment: "删除时间"
     }
   }, {
-    tableName: 'menu'
+    sequelize,
+    tableName: 'menu',
+    timestamps: false,
+    indexes: [
+      {
+        name: "PRIMARY",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "id" },
+        ]
+      },
+    ]
   });
 };
