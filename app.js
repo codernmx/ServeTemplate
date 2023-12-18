@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-08-04 15:02:49
- * @LastEditTime: 2023-08-04 15:10:19
+ * @LastEditTime: 2023-12-18 14:04:30
  */
 var express = require('express');
 var path = require('path');
@@ -16,8 +16,9 @@ var app = express();
 app.use(express.json({ limit: '200mb' })) //修改请求参数限制
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/upload', express.static(path.join(__dirname, '/upload')));
-
+app.use('/upload', express.static(path.join(__dirname, '/upload'), {
+	maxAge: 3600000, //设置可缓存文件
+}));
 /* 跨域 */
 app.all('*', function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -29,17 +30,19 @@ app.all('*', function (req, res, next) {
 
 /* 所有请求都过token校验 */
 app.use(function (req, res, next) {
+	console.log(req.path)
 	let passUrl = [
 		'/api/login',
-		'/api/upload/file',
 	]
 	if (!passUrl.includes(req.path)) {
 		let token = req.headers.token;
 		let result = jwt.verifyToken(token);
 		if (result.code == 500) {
 			res.send({
-				code: 403,
-				msg: '登录已过期,请重新登录'
+				code: 401,
+				msg: '权限验证失败~',
+				timestamp: new Date().getTime(),
+				path: req.path
 			});
 		} else {
 			next();
@@ -63,7 +66,8 @@ mysql_test.authenticate()  //用来测试数据库是否连接成功
 app.use(function (req, res, next) {
 	res.send({
 		msg: 'NOT FOUND',
-		code: 404
+		code: 404,
+		path: req.path
 	})
 });
 
