@@ -2,7 +2,7 @@
 
 配置 都在config/index 中
 
-mysql 版本 8.0 
+mysql 推荐版本 8.0 
 
 db 文件夹下是数据库文件
 

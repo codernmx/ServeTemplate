@@ -1,19 +1,7 @@
-const os = require('os')
-// 获取本机ip地址
-function getIpAddress () {
-	let Interfaces = os.networkInterfaces()
-	for (let dev in Interfaces) {
-		let iface = Interfaces[dev]
-		for (let i = 0; i < iface.length; i++) {
-			let { family, address, internal } = iface[i]
-			if (family === 'IPv4' && address !== '127.0.0.1' && !internal) {
-				return address
-			}
-		}
-	}
-}
+const { getIpAddress } = require ('../utils/system')
+
 const port = 4000  //项目的端口
-const fileUrl = `http://${getIpAddress()}:${port}/`  //文件访问路径
+const fileUrl = `http://${getIpAddress ()}:${port}/`  //文件访问路径
 const database = 'db' //数据库名称
 const user = 'root' //数据库用户名
 const password = '137928' //数据库密码

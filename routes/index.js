@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var md5 = require('md5-node');
-var jwt = require('../utils/jwt')
+const express = require('express');
+const router = express.Router();
+const md5 = require('md5-node');
+const jwt = require('../utils/jwt')
 const { success, fail, uuid } = require('../utils/index');
 const { literal, Op, Sequelize } = require("sequelize");
 const initModels = require('./../models/init-models')

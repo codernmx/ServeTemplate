@@ -1,24 +1,24 @@
 
-var express = require('express');
-var router = express.Router();
-var fs = require('fs'); //文件
-var multer = require('multer');   //上传文件中间件
-var moment = require('silly-datetime'); //格式化时间
+const express = require('express');
+const router = express.Router();
+const fs = require('fs'); //文件
+const multer = require('multer');   //上传文件中间件
+const moment = require('silly-datetime'); //格式化时间
 
 const { randomChar } = require('../utils/index')
 const { fileUrl } = require('../config/index')
 
-var createFolder = function (folder) {
+const createFolder = function (folder) {
 	try {
 		fs.accessSync(folder);
 	} catch (e) {
 		fs.mkdirSync(folder);
 	}
 };
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
 	destination: function (req, file, cb) {
 		const time = new Date().getFullYear()
-		var uploadFolder = './upload/' + time;
+		const uploadFolder = './upload/' + time;
 		createFolder(uploadFolder);
 		cb(null, 'upload/' + time);
 	},
