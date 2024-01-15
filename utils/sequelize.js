@@ -1,3 +1,7 @@
+/*
+ * @Date: 2023-08-20 17:46:09
+ * @LastEditTime: 2024-01-15 14:37:39
+ */
 
 //1.导入Sequelize模块
 const Sequelize = require('sequelize')

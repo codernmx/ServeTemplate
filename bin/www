@@ -7,23 +7,12 @@ const { port } = require('../config/index')
 var app = require('../app');
 var debug = require('debug')('projectname:server');
 var http = require('http');
-const os = require('os')
+const { getIpAddress } = require('../utils/system')
+
 /**
  * Get port from environment and store in Express.
  */
-// 获取本机ip地址
-function getIpAddress () {
-	let Interfaces = os.networkInterfaces()
-	for (let dev in Interfaces) {
-		let iface = Interfaces[dev]
-		for (let i = 0; i < iface.length; i++) {
-			let { family, address, internal } = iface[i]
-			if (family === 'IPv4' && address !== '127.0.0.1' && !internal) {
-				return address
-			}
-		}
-	}
-}
+
 
 app.set('port', port);
 
@@ -40,8 +29,8 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-console.log(`You Can View Your Project In The Browser At: \x1b[96mhttp://localhost:${port}\x1b[0m`);
-console.log(`You Can View Your Project In The Browser At: \x1b[96mhttp://${getIpAddress()}:${port}\x1b[0m`);
+console.log(`> Local: \x1b[96mhttp://localhost:${port}\x1b[0m`);
+console.log(`> Network: \x1b[96mhttp://${getIpAddress()}:${port}\x1b[0m`);
 
 /**
  * Normalize a port into a number, string, or false.

@@ -1,4 +1,6 @@
 const os = require ('os')
+
+
 // 获取本机ip地址
 const getIpAddress = function () {
 	let Interfaces = os.networkInterfaces ()
@@ -14,6 +16,8 @@ const getIpAddress = function () {
 }
 
 
+
+
 module.exports = {
-	getIpAddress
+	getIpAddress,
 }

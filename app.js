@@ -1,6 +1,6 @@
 /*
  * @Date: 2023-08-04 15:02:49
- * @LastEditTime: 2023-12-18 14:04:30
+ * @LastEditTime: 2024-01-15 14:20:16
  */
 const express = require ('express');
 const path = require ('path');
@@ -60,9 +60,9 @@ app.use ('/api/upload', Upload);
 
 mysql_test.authenticate ()  //用来测试数据库是否连接成功
 	.then (() => {
-		console.log ('数据库连接成功')
+		console.log ('> Mysql: Database Connection Successful !')
 	}).catch ((err) => {
-	console.log ('数据库连接失败:' + err)
+	console.log ('> Error: Database Connection Failed. Please Check The Configuration: ' + err)
 })
 
 app.use (function (req, res, next) {

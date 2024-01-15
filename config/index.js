@@ -1,7 +1,7 @@
-const { getIpAddress } = require ('../utils/system')
+const { getIpAddress } = require('../utils/system')
 
 const port = 4000  //项目的端口
-const fileUrl = `http://${getIpAddress ()}:${port}/`  //文件访问路径
+const fileUrl = `http://${getIpAddress()}:${port}/`  //文件访问路径
 const database = 'db' //数据库名称
 const user = 'root' //数据库用户名
 const password = '137928' //数据库密码
@@ -27,6 +27,10 @@ const options = {
 		typeCast: true //处理时间格式问题
 	}
 }
+// 小程序相关配置
+const WEAPP_APP_ID = 'xxx'   //小程序appid
+const WEAPP_APP_SECRET = 'xxx' //小程序秘钥
+
 
 module.exports = {
 	fileUrl,
@@ -35,5 +39,7 @@ module.exports = {
 	user,
 	password,
 	host,
-	port
+	port,
+	WEAPP_APP_ID,
+	WEAPP_APP_SECRET
 }
